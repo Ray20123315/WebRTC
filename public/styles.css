@@ -1,0 +1,21 @@
+:root{font-family:system-ui,"Microsoft JhengHei",sans-serif;color:#19324b;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:32px 24px}.eyebrow{color:#147a79;letter-spacing:.15em;font-size:12px;font-weight:700}h1{font-size:36px;margin:8px 0}h2{font-size:15px;margin:0 0 12px}p{line-height:1.6;color:#526678}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding:18px 0}label{display:flex;flex-direction:column;gap:6px;font-size:12px}input,select,button{font:inherit;border:1px solid #cbd6e0;border-radius:6px;padding:9px;background:white;color:#19324b}input[type=number]{width:95px}input[type=file]{max-width:215px}#room{width:150px}button{background:#127877;color:white;cursor:pointer;padding:10px 14px}button:disabled{opacity:.45;cursor:default}.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}article{background:#fff;border:1px solid #dce4ec;border-radius:12px;padding:16px}canvas,video{display:block;width:100%;aspect-ratio:4/3;background:#172939;object-fit:contain}video[hidden]{display:none}.remote{position:relative}#roiBox{position:absolute;border:2px dashed #ed9c32;pointer-events:none;left:30%;top:20%;width:40%;height:60%}.dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}strong{font-size:23px}#decision{font-size:20px}.notice{font-size:13px}pre{background:#fff;border:1px solid #dce4ec;white-space:pre-wrap;padding:16px;max-height:220px;overflow:auto;font-size:12px}@media(max-width:750px){.video-grid,.dashboard{grid-template-columns:1fr}main{padding:20px 14px}h1{font-size:28px}}
+
+.switch{display:flex;flex-direction:row;align-items:center;gap:10px;font-weight:700;min-height:40px}.switch input{appearance:none;width:46px;height:26px;border-radius:20px;background:#cad4dc;position:relative;padding:0;cursor:pointer}.switch input:before{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:white;transition:left .15s}.switch input:checked{background:#137a79}.switch input:checked:before{left:23px}.switch input:focus-visible{outline:3px solid #96cbd6}
+
+/* UI color refresh: retain page, panel and video backgrounds and geometry. */
+.eyebrow{color:#3155a6}
+p{color:#40556b}
+.notice{color:#334155}
+label{color:#263d57}
+#sourceStatus,#deepfaceStatus,#connectionState{color:#334155}
+button{background:#2563eb;border-color:#244ac4;border-radius:8px;font-weight:600;box-shadow:0 2px 6px #244ac424;transition:box-shadow .15s,border-color .15s}
+button:hover:not(:disabled){border-color:#1e3a8a;box-shadow:0 3px 10px #244ac43d}
+button:active:not(:disabled){box-shadow:inset 0 2px 4px #15234d40}
+#launchDeepface{background:#fecaca;border-color:#f87171;color:#7f1d1d;box-shadow:none}
+#launchDeepface:hover:not(:disabled),#launchDeepface:active:not(:disabled){border-color:#dc2626;box-shadow:none}
+#stopButton{background:#be123c;border-color:#9f1239}
+button:disabled,#stopButton:disabled{background:#e2e8f0;border-color:#cbd5e1;color:#52647a;opacity:1;box-shadow:none}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.switch input:checked{background:#2563eb;border-color:#244ac4}
+.switch input:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+

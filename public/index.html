@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebRTC 浮水印實驗室</title><link rel="stylesheet" href="styles.css"></head><body>
+<main><p class="eyebrow">WEBRTC · DCT · WEBGPU</p><h1>視訊浮水印實驗室</h1><p>採集 → 像素浮水印 → WebRTC 編碼 → 解碼 → 區域完整性檢測</p>
+<section class="controls">
+<label class="switch"><input id="sourceSigning" type="checkbox" role="switch">本機攝影機＋TPM 來源簽章</label><span id="sourceStatus" aria-live="polite">來源未驗證</span>
+<p class="notice">預設成本機攝影機。私鑰保存在 Windows TPM 金鑰提供者；首次本機登錄公鑰。簽章驗證採集影像，尚未認證攝影機硬體或採集程式，也未綁定 WebRTC 解碼像素。來源簽章通過不代表真人。</p>
+<label class="switch"><input id="deepfaceToggle" type="checkbox" role="switch">DeepFaceLive 測試開關</label><button id="launchDeepface">啟動 DeepFaceLive</button><span id="deepfaceStatus">尚未檢查安裝</span>
+<label>換臉時點<select id="attackPosition"><option value="after">浮水印之後換臉（防禦測試）</option><option value="before">浮水印之前換臉（信任邊界測試）</option></select></label>
+<label>模式<select id="mode"><option value="loop">本機雙 PeerConnection</option><option value="sender">房間發送端</option><option value="receiver">房間接收端</option></select></label>
+<label>來源<select id="source"><option value="camera">攝影機 → 嵌入浮水印</option><option value="fixture">DeepFaceLive 官方合成人臉測試圖</option><option value="synthetic">合成畫面 → 嵌入浮水印</option><option value="external">DeepFaceLive / OBS 攝影機輸出（不重新嵌入）</option><option value="file">已處理影片（不重新嵌入）</option></select></label>
+<label>攝影機<select id="camera"><option value="">預設</option></select></label><button id="devices">更新裝置</button>
+<label>房間<input id="room" value="watermark-lab" maxlength="64"></label>
+<label>Codec<select id="codec"><option>VP8</option><option>H264</option><option>VP9</option></select></label>
+<label>位元率 kbps<input id="bitrate" type="number" value="2000" min="100" max="10000"></label>
+<label>目標 FPS<input id="fps" type="number" value="30" min="5" max="30"></label>
+<label>強度<input id="strength" type="number" min="8" max="100" value="36"></label>
+<label>影片<input id="file" type="file" accept="video/*"></label>
+<button id="startButton">啟動</button><button id="stopButton" disabled>停止</button><span id="connectionState">未啟動</span>
+</section>
+<section class="video-grid"><article><h2>發送畫面 / DeepFaceLive 輸入</h2><canvas id="senderCanvas" width="640" height="480"></canvas><video id="localVideo" muted playsinline hidden></video></article><article><h2>WebRTC 解碼畫面</h2><div class="remote"><video id="remoteVideo" autoplay muted playsinline></video><div id="roiBox"></div></div></article></section>
+<section class="controls"><label>臉部 ROI x<input id="roiX" type="number" min="0" max=".9" step=".05" value=".3"></label><label>y<input id="roiY" type="number" min="0" max=".9" step=".05" value=".2"></label><label>寬<input id="roiW" type="number" min=".1" max="1" step=".05" value=".4"></label><label>高<input id="roiH" type="number" min=".1" max="1" step=".05" value=".6"></label><button id="calibrate">正常通道校準（30 樣本）</button><button id="simulate">局部破壞：關</button></section>
+<section class="dashboard"><article><h2>完整性狀態</h2><strong id="decision">尚未校準</strong></article><article><h2>臉部區域浮水印符合率</h2><strong id="face">—</strong></article><article><h2>背景浮水印符合率</h2><strong id="background">—</strong></article><article><h2>嵌入／提取延遲（第95百分位）</h2><strong id="latency">—</strong><p id="performance">尚無量測</p></article></section>
+<section class="controls"><button id="record">錄製浮水印輸入影片</button><button id="export">匯出實驗設定與量測</button><label>匯入原實驗設定<input id="import" type="file" accept="application/json"></label></section>
+<p class="notice">先在正常通道校準。ROI（Region of Interest）為手動指定，請將臉放在框內。紅色代表區域浮水印疑似遭破壞；灰色或通道劣化不可判定換臉。局部破壞按鈕只是合成篡改測試。</p>
+<p class="notice">此版為完整性實驗，沒有攝影機硬體認證。DeepFaceLive 在浮水印嵌入之前換臉仍可能通過。固定 640×480、不縮放、不裁切為目前實驗條件；30 FPS / &lt;30 ms 必須由實際量測驗收。</p>
+<pre id="log" aria-live="polite"></pre></main><script src="watermark.js"></script><script src="camera.js"></script><script src="source.js"></script><script src="app.js"></script></body></html>

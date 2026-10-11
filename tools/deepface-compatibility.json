@@ -1,0 +1,9 @@
+{
+  "source_commit": "fc7b787bda2b8c186e142c52857458eea3a935ed",
+  "python": "3.10",
+  "changes": [
+    "Nine exact 'from collections import Iterable' imports changed to collections.abc",
+    "QSliderCSWNumber._on_csw_number: setValue(int(round(value))) for PyQt6 integer API"
+  ],
+  "engine_note": "Use DFMModel constructor directly; upstream DFMModel_from_path passes an unsupported __check keyword"
+}
